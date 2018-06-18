@@ -1,22 +1,51 @@
 import React from 'react'
-import {AuthContext, AuthProvider} from '../context/Auth'
-
-const LoginComponent = ({username, password, login, input}) => {
-  console.log(this.props)
-  return (<div>
-    <h2>Login Here</h2>
-    <div>
-      <input value={username} onInput={input} name='username' type='text' placeholder='Enter Username'/>
-      <input value={password} onInput={input} name='password' type='text' placeholder='Enter Password'/>
-    </div>
-  </div>)
-}
+import {AuthContext} from '../context/Auth'
+import {Redirect} from 'react-router-dom'
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      username: '',
+      password: ''
+    }
+  }
+
+  handleInput = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   render() {
-    return (<AuthContext.Consumer>
-      {({username, password, handleInput, handleLogin}) => <LoginComponent username={username} password={password} login={handleLogin} input={handleInput}/>}
-    </AuthContext.Consumer>)
+    let credentials = ['username', 'password']
+    const { username, password } = this.state
+    if (auth) {
+      return (<div>
+        <form onSubmit={() => {
+            auth.auth.login(username, password)
+          }}>
+          <h1>Please Login</h1>
+          {
+            credentials.map(field => (<div className='login-form-section' key={field}>
+              <label>
+                <span className='form-section-field'>{field}</span>
+                {""}
+                <div>
+                  <input value={this.state[field]} name={field} onInput={this.handleInput} type='text'/>
+                </div>
+              </label>
+            </div>))
+          }
+          <label>
+            <button type='submit' className='login-form-submit'>Submit</button>
+          </label>
+        </form>
+      </div>)
+    } else {
+      return (<div>loading</div>)
+    }
   }
 }
 

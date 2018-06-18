@@ -7,10 +7,6 @@ import {AuthContext, AuthProvider} from './context/Auth'
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <AuthProvider>
-    <AuthContext.Consumer>
-      {({ username, password, handleLogin }) => {<BrowserRouter> <App /></BrowserRouter>}}
-    </AuthContext.Consumer>
-  </AuthProvider>,
+    <BrowserRouter><App /></BrowserRouter>,
   document.getElementById('root'));
 registerServiceWorker();

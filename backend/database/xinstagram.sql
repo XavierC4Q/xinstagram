@@ -30,4 +30,4 @@ CREATE TABLE comments (
   user_id INTEGER REFERENCES users,
   comment_by INTEGER);
 
-INSERT INTO users (username, password, phone, email, private) VALUES ('Xavier', '$2a$10$C10mTqxF6zBf2CnQE3oxfOP/8PpF25LyN1v7lRp4KjLYIBLczWGvm', '7187102625', 'hotmail.com', false);
+INSERT INTO users (username, password, phone, email, private) VALUES ('Xavier', '$2a$10$9Qd8hOUaddxTBoh8EmzLnumDRTpj8Xsez4dtKvIBQ.uprt/z40t2K', '7187102625', 'gmail', false);

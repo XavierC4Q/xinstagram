@@ -1,46 +1,59 @@
 import React from 'react'
-import { loginUser } from '../axios/postrequest'
+import axios from 'axios'
 
 export const AuthContext = React.createContext()
 
 export class AuthProvider extends React.Component {
-  constructor(){
+  constructor() {
     super()
 
     this.state = {
-      username: '',
-      password: '',
       user: '',
       loggedIn: false
     }
   }
 
   handleInput = event => {
-    this.setState({ [event.target.name] : event.target.value })
-  }
-
-  handleLogin = () => {
-    const { username, password } = this.state
-
-    loginUser(username, password).then(res => {
-      this.setState({
-        username: '',
-        password: '',
-        user: res.data[0],
-        loggedIn: true
-      })
+    this.setState({
+      [event.target.name]: event.target.value
     })
   }
 
-  render(){
-    return(
-      <AuthProvider value={{
-          ...this.state,
-          handleLogin: this.handleLogin,
-          handleInput: this.handleInput
-        }}>
-        {this.props.children}
-      </AuthProvider>
-    )
+  handleLogin = (username, password) => {
+    axios.post('/post/login', {
+      username: username,
+      password: password
+    }).then(() => {
+      this.setState({loggedIn: true})
+    })
+    .catch(error => {
+      console.log('flaw in the login')
+    })
+  }
+
+  handleRegister = (username, password, email, phone, private ) => {
+    axios.post('/post/register', {
+      username: username,
+      password: password,
+      email: email,
+      phone: phone,
+      private: private
+    })
+    .then(res => {
+      this.setState({user: res.data.data})
+    })
+    .catch(error => {
+      console.log('flaw in the register')
+    })
+  }
+
+  render() {
+    return (<AuthContext.Provider value={{
+        ...this.state,
+        login: this.handleLogin,
+        input: this.handleInput
+      }}>
+      {this.props.children}
+    </AuthContext.Provider>)
   }
 }

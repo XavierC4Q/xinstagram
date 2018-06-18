@@ -1,11 +1,12 @@
 import React from 'react'
 import {Route, Link, Switch} from 'react-router-dom'
+import {AuthProvider, AuthContext} from '../context/Auth'
 
 import Login from './Login'
 
 class Main extends React.Component {
 
-  mainpage = () => {
+  mainPage = () => {
     return(
       <div>
         <h1>Main Page</h1>
@@ -14,11 +15,27 @@ class Main extends React.Component {
       </div>
     )
   }
+
+  loginPage = () => {
+    return(
+      <div>
+        <AuthProvider>
+          <AuthContext.Consumer>
+            {value => (
+              <Login auth={value} />
+            )}
+          </AuthContext.Consumer>
+        </AuthProvider>
+      </div>
+    )
+  }
+
+
   render(){
     return(
       <Switch>
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/' render={this.mainpage} />
+        <Route exact path='/' render={this.mainPage} />
+        <Route path='/login' component={this.loginPage} />
       </Switch>
     )
   }
