@@ -36,9 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/isloggedin', function(req, res) {
+app.get('/isLoggedIn', function(req, res) {
     if(req.session.passport.user) {
-      res.status(200).send('loggedIn');
+      res.status(200).send('logged in');
     } else {
       res.status(401).send('User not logged in.');
     }

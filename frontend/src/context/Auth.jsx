@@ -9,14 +9,9 @@ export class AuthProvider extends React.Component {
 
     this.state = {
       user: '',
-      loggedIn: false
+      loggedIn: false,
+      message: ''
     }
-  }
-
-  handleInput = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
   }
 
   handleLogin = (username, password) => {
@@ -31,16 +26,16 @@ export class AuthProvider extends React.Component {
     })
   }
 
-  handleRegister = (username, password, email, phone, private ) => {
+  handleRegister = (username, password, email, phone, privacy ) => {
     axios.post('/post/register', {
       username: username,
       password: password,
       email: email,
       phone: phone,
-      private: private
+      private: privacy
     })
     .then(res => {
-      this.setState({user: res.data.data})
+      this.setState({user: res.data.data, message: 'You have been registered'})
     })
     .catch(error => {
       console.log('flaw in the register')
@@ -51,7 +46,7 @@ export class AuthProvider extends React.Component {
     return (<AuthContext.Provider value={{
         ...this.state,
         login: this.handleLogin,
-        input: this.handleInput
+        register: this.handleRegister
       }}>
       {this.props.children}
     </AuthContext.Provider>)
