@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
+import {isLoggedIn} from '../requests/get'
+
 export const AuthContext = React.createContext()
 
 export class AuthProvider extends React.Component {
@@ -12,6 +14,10 @@ export class AuthProvider extends React.Component {
       loggedIn: false,
       message: ''
     }
+  }
+
+  componentDidMount(){
+    
   }
 
   handleLogin = (username, password) => {

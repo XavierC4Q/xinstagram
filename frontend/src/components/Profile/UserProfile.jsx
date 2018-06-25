@@ -1,21 +1,29 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 import UserPage from './UserPage'
+import UserEdit from './UserEdit'
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props)
   }
 
-  userPage = () => {
-    return (<UserPage user={this.props.profile}/>)
+  userPage = props => {
+    const {userID} = props.match.params
+    return (<UserPage user={this.props.profile} id={userID} />)
+  }
+
+  userEdit = () => {
+    return (<UserEdit user={this.props.profile}/>)
   }
 
   render() {
     return (<div>
       <Switch>
-        <Route exact="exact" path='/profile/userpage' render={this.userPage}/>
+        <Route exact path='/profile/page/:userID' render={this.userPage}/>
+        <Route path='/profile/edit' render={this.userEdit}/>
       </Switch>
     </div>)
   }

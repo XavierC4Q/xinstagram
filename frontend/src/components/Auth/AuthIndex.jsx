@@ -1,5 +1,6 @@
 import React from 'react'
 import {Route, Link, Switch} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {AuthProvider, AuthContext} from '../../context/Auth'
 
 import Login from './Login'
@@ -9,20 +10,17 @@ const Home = ({auth}) => {
 
   return (<div>
     {
-      !auth.loggedIn
-        ? <nav>
-            <Link to='/login'>Login</Link>
-            {" "}
-            <Link to='/register'>Register</Link>
-          </nav>
-        : <nav>
-            <Link to='/profile/userpage'>Profile</Link>
-            {" "}
-            <Link to='/feed/userfeed'>Feed</Link>
-            {" "}
-          </nav>
+      auth.loggedIn
+        ? (<Redirect to='/feed/user'/>)
+        : <div>
+            <nav>
+              <Link to='/login'>Login Here</Link>
+              {" "}
+              <Link to='/register'>Register Here</Link>
+            </nav>
+            <h1>XInstagram: A React Context Project</h1>
+          </div>
     }
-    <h1>Xinstagram: A React Context Project</h1>
   </div>)
 }
 

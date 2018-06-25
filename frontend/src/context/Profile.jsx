@@ -10,6 +10,10 @@ export class ProfileProvider extends React.Component {
 
     this.state = {
       user: '',
+      userPhotos: '',
+      follows: '',
+      followers: '',
+      favorities: '',
       allUsers: ''
     }
   }

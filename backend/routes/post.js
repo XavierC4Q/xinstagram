@@ -5,5 +5,6 @@ const { loginRequired } = require("../auth/helpers");
 
 router.post('/login', db.loginUser)
 router.post('/register', db.registerUser)
+router.post('/postphoto', loginRequired, db.postPhoto)
 
 module.exports = router;

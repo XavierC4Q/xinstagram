@@ -9,11 +9,13 @@ CREATE TABLE users (
   password VARCHAR NOT NULL,
   phone VARCHAR(15),
   email VARCHAR NOT NULL,
+  profile_pic VARCHAR,
   private BOOLEAN NOT NULL);
 
 CREATE TABLE photos (
   photo_id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users);
+  user_id INTEGER REFERENCES users,
+  url VARCHAR NOT NULL);
 
 CREATE TABLE friends (
   friend_id SERIAL PRIMARY KEY,
@@ -30,4 +32,4 @@ CREATE TABLE comments (
   user_id INTEGER REFERENCES users,
   comment_by INTEGER);
 
-INSERT INTO users (username, password, phone, email, private) VALUES ('Xavier', '$2a$10$9Qd8hOUaddxTBoh8EmzLnumDRTpj8Xsez4dtKvIBQ.uprt/z40t2K', '7187102625', 'gmail', false);
+INSERT INTO users (username, password, phone, email, profile_pic, private) VALUES ('Xavier', '$2a$10$9Qd8hOUaddxTBoh8EmzLnumDRTpj8Xsez4dtKvIBQ.uprt/z40t2K', '7187102625', 'gmail', 'https://icon2.kisspng.com/20180518/wby/kisspng-computer-icons-x-letter-clip-art-5aff5c67b7bdf6.5490574715266847757526.jpg', false);

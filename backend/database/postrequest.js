@@ -44,7 +44,24 @@ function loginUser(req, res, next) {
   })(req, res, next);
 }
 
+function postPhoto(req, res, next) {
+  return db.one(
+    "INSERT INTO photos (user_id, url)" + "VALUES (${user_id}, ${url})" + "RETURNING user_id, photo_id",
+    {
+      user_id: req.user.user_id,
+      url: req.body.url
+    }
+  )
+  .then(data => {
+    res.json({ photo_id: data.photo_id })
+  })
+  .catch(error => {
+    res.json(error)
+  })
+}
+
 module.exports = {
   loginUser,
-  registerUser
+  registerUser,
+  postPhoto
 }

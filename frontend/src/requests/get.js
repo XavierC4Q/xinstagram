@@ -9,3 +9,10 @@ export const allUsers = async function() {
   let users = await axios.get('/get/allusers')
   return users
 }
+
+
+export const getUserPhotos = async function(id) {
+  let path = `/get/getuserphotos/${id}`
+  let userPhotos = await axios.get(path)
+  return userPhotos
+}

@@ -4,4 +4,6 @@ var db = require('../database/patchrequest');
 const { loginRequired } = require("../auth/helpers");
 
 
+router.patch('/useredit/:userID', loginRequired, db.editUser)
+
 module.exports = router;
