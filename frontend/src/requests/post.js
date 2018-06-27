@@ -7,3 +7,11 @@ export const postPhoto = async function(url,id){
   })
   return postedPhoto
 }
+
+export const followUser = async function(userID, follows_user){
+  let followRequest = await axios.post('/post/follow',{
+    user_id: userID,
+    follows_user: follows_user
+  })
+  return followRequest
+}

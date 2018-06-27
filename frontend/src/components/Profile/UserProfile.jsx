@@ -5,6 +5,8 @@ import {Redirect} from 'react-router-dom'
 import UserPage from './UserPage'
 import UserEdit from './UserEdit'
 
+import {postPhoto} from '../../requests/post'
+
 class UserProfile extends React.Component {
   constructor(props) {
     super(props)
@@ -12,7 +14,7 @@ class UserProfile extends React.Component {
 
   userPage = props => {
     const {userID} = props.match.params
-    return (<UserPage user={this.props.profile} id={userID} />)
+    return (<UserPage user={this.props.profile} id={userID} postPhoto={postPhoto}/>)
   }
 
   userEdit = () => {

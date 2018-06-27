@@ -10,10 +10,6 @@ export class ProfileProvider extends React.Component {
 
     this.state = {
       user: '',
-      userPhotos: '',
-      follows: '',
-      followers: '',
-      favorities: '',
       allUsers: ''
     }
   }
@@ -24,8 +20,14 @@ export class ProfileProvider extends React.Component {
     })
   }
 
+  updateUser = () => {
+    Promise.all([isLoggedIn(), allUsers()]).then(values => {
+      this.setState({user: values[0].data[0], allUsers: values[1].data})
+    })
+  }
+
   render() {
-    return (<ProfileContext.Provider value={this.state}>
+    return (<ProfileContext.Provider value={{...this.state, update: this.updateUser}}>
       {this.props.children}
     </ProfileContext.Provider>)
   }

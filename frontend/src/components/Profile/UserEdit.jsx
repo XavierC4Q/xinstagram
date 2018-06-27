@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class UserEdit extends React.Component {
   constructor(props) {
@@ -57,6 +58,9 @@ class UserEdit extends React.Component {
         privacy: false,
         message: 'Changes made'
       })
+    })
+    .then(() => {
+      this.props.user.update()
     }).catch(error => {
       console.log('flaw in the user edit')
     })
@@ -64,6 +68,7 @@ class UserEdit extends React.Component {
 
   render() {
     const { username, profile_pic, password, email, phone, privacy, message } = this.state
+    let profilePath = `/profile/page/${this.props.user.user.user_id}`
     return (<div>
       <h1>Edit Your Profile</h1>
       <form onSubmit={event => {
@@ -120,6 +125,7 @@ class UserEdit extends React.Component {
         </div>
         <div>
           {message}
+          <Link to={profilePath}>Back to Profile</Link>
         </div>
       </form>
     </div>)

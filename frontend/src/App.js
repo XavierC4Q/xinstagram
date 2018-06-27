@@ -38,13 +38,13 @@ class App extends Component {
   render() {
     return (<div>
       <Switch>
-        <Route exact="exact" path='/' render={this.welcomePage}/>
+        <Route exact path='/' render={this.welcomePage}/>
         <Route path='/login' render={this.welcomePage}/>
         <Route path='/register' render={this.welcomePage}/>
-        <Route exact="exact" path='/profile/userpage/' render={this.profilePages}/>
+        <Route exact path='/profile/userpage/' render={this.profilePages}/>
         <Route path='/profile/edit' render={this.profilePages}/>
         <Route path='/profile/page/:userID' render={this.profilePages}/>
-        <Route exact="exact" path='/feed/user' render={this.feedPages}/>
+        <Route exact path='/feed/user' render={this.feedPages}/>
       </Switch>
     </div>);
   }
