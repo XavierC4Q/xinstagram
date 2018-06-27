@@ -60,8 +60,25 @@ function postPhoto(req, res, next) {
   })
 }
 
+function folllowUser(req, res, next) {
+  return db.one(
+    "INSERT INTO follows (user_id, follows_user) VALUES (${user_id}, ${follows_user})",
+    {
+      user_id: req.body.user_id,
+      follows_user: req.body.follows_user
+    }
+  )
+  .then(data => {
+    res.json("success")
+  })
+  .catch(error => {
+    res.json(error)
+  })
+}
+
 module.exports = {
   loginUser,
   registerUser,
-  postPhoto
+  postPhoto,
+  folllowUser
 }
